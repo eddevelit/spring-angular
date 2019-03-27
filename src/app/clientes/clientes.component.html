@@ -7,7 +7,7 @@
       <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clientes/form']">Crear Cliente</button>
     </div>
 
-    <div class="alert alert-info">
+    <div class="alert alert-info" *ngIf="clientes?.length==0">
       No hay registros en la base de datos!
     </div>
 
