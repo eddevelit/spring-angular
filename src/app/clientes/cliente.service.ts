@@ -6,6 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import swal from 'sweetalert2';
 import {Router} from '@angular/router';
+import {DatePipe, formatDate} from '@angular/common';
 
 @Injectable()
 export class ClienteService {
@@ -19,8 +20,10 @@ export class ClienteService {
       map(response => {
         let clientes = response as Cliente[];
         return clientes.map(cliente => {
-          cliente.nombre = cliente.nombre
-            .toUpperCase();
+          cliente.nombre = cliente.nombre.toUpperCase();
+          let datePipe = new DatePipe('en-US');
+          cliente.createAt = datePipe.transform(cliente.createAt, 'dd/MM/yyyy');
+          // formatDate(cliente.createAt, 'dd-MM-yyyy', 'en-US');
           return cliente;
         });
       }
