@@ -4,7 +4,7 @@ import localEs from '@angular/common/locales/es-MX';
 import { Cliente} from './cliente';
 import {of, Observable, throwError} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
+import {map, catchError, tap} from 'rxjs/operators';
 import swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {DatePipe} from '@angular/common';
@@ -16,19 +16,32 @@ export class ClienteService {
 
   constructor(private http: HttpClient, private router: Router) { }
   getclientes(): Observable<Cliente[]> {
-    // return of(CLIENTES);
     return this.http.get(this.urlEndPoint).pipe(
+      tap(response => {
+        const clientes = response as Cliente[];
+        console.log('ClienteService: tap1');
+        clientes.forEach(cliente => {
+          console.log(cliente.nombre);
+        });
+        }),
       map(response => {
         const clientes = response as Cliente[];
         return clientes.map(cliente => {
           cliente.nombre = cliente.nombre.toUpperCase();
-          const datePipe = new DatePipe('es-Mx');
+          // const datePipe = new DatePipe('es-Mx');
           // cliente.createAt = datePipe.transform(cliente.createAt, 'EEEE dd, MMMM yyyy');
           // formatDate(cliente.createAt, 'dd-MM-yyyy', 'en-US');
           return cliente;
         });
       }
-      )
+      ),
+      tap(response => {
+        console.log('ClienteService: tap2');
+        response.forEach(cliente => {
+            console.log(cliente.nombre);
+          }
+        );
+      })
     );
   }
 
