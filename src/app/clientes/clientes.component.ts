@@ -28,8 +28,8 @@ export class ClientesComponent implements OnInit {
   delete(cliente: Cliente): void {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
-        confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
+        confirmButton: 'btn btn-light',
+        cancelButton: 'btn btn-light'
       },
       buttonsStyling: false,
     })
