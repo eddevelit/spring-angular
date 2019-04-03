@@ -46,6 +46,7 @@ progreso = 0;
           } else if (event.type === HttpEventType.Response) {
             const response: any = event.body;
             this.cliente = response.cliente as Cliente;
+            this.modalService.notificarUpload.emit(this.cliente);
             swal.fire('La foto se ha subido completamente!', response.mensaje, 'success');
           }
         });
