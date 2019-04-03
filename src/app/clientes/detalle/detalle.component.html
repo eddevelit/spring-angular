@@ -23,7 +23,7 @@
           </div>
         </div>
 
-        <div *ngIf="progreso > 0" class="progress">
+        <div *ngIf="progreso > 0" class="progress" style="height: 40px">
           <div class="progress-bar bg-success" role="progressbar" [ngStyle]="{width: progreso +'%'}" attr.aria-valuenow="{{progreso}}" aria-valuemin="0" aria-valuemax="100">
             {{progreso}}%
           </div>

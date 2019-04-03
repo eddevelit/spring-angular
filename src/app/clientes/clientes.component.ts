@@ -12,6 +12,8 @@ import {ActivatedRoute} from '@angular/router';
 export class ClientesComponent implements OnInit {
   clientes: Cliente[];
   paginador: any;
+  clienteSeleccionado: Cliente;
+
   constructor(private clienteService: ClienteService, private activatedRoute: ActivatedRoute ) { }
 
   ngOnInit() {
@@ -41,7 +43,7 @@ export class ClientesComponent implements OnInit {
         cancelButton: 'btn btn-light'
       },
       buttonsStyling: false,
-    })
+    });
 
     swalWithBootstrapButtons.fire({
       title: 'Está seguro?',
@@ -66,6 +68,10 @@ export class ClientesComponent implements OnInit {
         );
       }
     });
+  }
+
+  abrirModal(cliente: Cliente) {
+    this.clienteSeleccionado = cliente;
   }
 
 }
