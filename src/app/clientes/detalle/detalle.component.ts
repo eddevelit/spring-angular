@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Cliente} from '../cliente';
 import {ClienteService} from '../cliente.service';
-import {ActivatedRoute} from '@angular/router';
 import swal from 'sweetalert2';
 import {HttpEventType} from '@angular/common/http';
+import {ModalService} from './modal.service';
 
 @Component({
   selector: 'detalle-cliente',
@@ -17,7 +17,8 @@ titulo = 'Detalle del cliente';
 private fotoSeleccionada: File;
 progreso = 0;
 
-  constructor(private clienteService: ClienteService, private activatedRoute: ActivatedRoute) { }
+  constructor(private clienteService: ClienteService,
+              private modalService: ModalService) { }
 
   ngOnInit() {
   }
@@ -49,6 +50,11 @@ progreso = 0;
           }
         });
     }
+    }
+  cerrarModal() {
+    this.modalService.cerrarModal();
+    this.fotoSeleccionada = null ;
+    this.progreso = 0;
   }
 
 }
