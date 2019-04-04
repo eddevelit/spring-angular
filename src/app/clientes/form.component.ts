@@ -31,6 +31,7 @@ export class FormComponent implements OnInit {
     this.clienteService.getRegiones().subscribe(regiones => this.regiones = regiones);
   }
   public create(): void {
+    console.log(this.cliente);
     this.clienteService.create(this.cliente)
       .subscribe(cliente => {
         this.router.navigate(['/clientes']);
@@ -45,6 +46,7 @@ export class FormComponent implements OnInit {
   }
 
   update(): void {
+    console.log(this.cliente);
     this.clienteService.update(this.cliente)
       .subscribe( json => {
           this.router.navigate(['/clientes'])
@@ -58,7 +60,7 @@ export class FormComponent implements OnInit {
       );
   }
 
-  compararRegion(o1: Region, o2: Region ) {
-    return o1 === null || o2 === null ? false : o1.id === o2.id;
+  compararRegion(o1: Region, o2: Region ): boolean {
+    return o1 === null || o2 === null || o1 == null || o2 == null ? false : o1.id === o2.id;
   }
 }
