@@ -69,4 +69,12 @@ export class AuthService {
     if (accessToken != null) {return JSON.parse(atob(accessToken.split('.')[1])); }
     return null;
   }
+
+  isAthenticated(){
+    let payload = this.obtenerDatosToken(this.token);
+    if(payload != null && payload.user_name && payload.user_name.length>0){
+      return true;
+    }
+    return false;
+  }
 }
