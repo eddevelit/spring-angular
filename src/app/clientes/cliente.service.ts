@@ -26,6 +26,9 @@ export class ClienteService {
 
   private isNoAutorizado(e): boolean {
     if (e.status === 401) {
+      if (this.authService.isAthenticated()) {
+        this.authService.logout();
+      }
       this.router.navigate(['/login']);
       return true;
     }
