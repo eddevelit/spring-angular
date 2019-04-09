@@ -4,7 +4,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <li class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
@@ -17,7 +17,15 @@
       </li>
     </ul>
     <ul class="navbar-nav navbar-rigth">
-      <li><a [routerLink]="['/login']" class="btn btn-outline-primary">sign In</a></li>
+      <li *ngIf="!authService.isAthenticated()"><a [routerLink]="['/login']" class="btn btn-outline-primary">sign In</a></li>
+      <li *ngIf="authService.isAthenticated()" class="dropdown">
+        <a class="btn btn-outline-primary dropdown-toggle" type="button"  role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{authService.usuario.username}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <button (click)="logout()" class="dropdown-item" type="submit">Sign out</button>
+        </div>
+      </li>
     </ul>
-  </div>
+
 </nav>
