@@ -42,7 +42,7 @@ export class AuthService {
       'Authorization': 'Basic ' + credenciales
     });
 
-    let params = new URLSearchParams();
+    const params = new URLSearchParams();
     params.set('grant_type', 'password');
     params.set('username', usuario.username);
     params.set('password', usuario.password);
@@ -73,6 +73,12 @@ export class AuthService {
   isAthenticated(){
     const payload = this.obtenerDatosToken(this.token);
     if(payload != null && payload.user_name && payload.user_name.length>0){
+      return true;
+    }
+    return false;
+  }
+  hasRole(role: string): boolean{
+    if (this.usuario.roles.includes(role)) {
       return true;
     }
     return false;
